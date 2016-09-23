@@ -13,24 +13,32 @@ window.addEventListener("load", function () {
 		origen.style.display = "none";
 
 		var form = document.createElement("form");
-		var input = document.createElement("input");
+		var input = document.createElement("input").classList.add("form-control");
 		var boton = document.createElement("button");
 		var textoBoton = document.createTextNode("Añadir");
+		var icon = document.createElement("icon");
 		
 		boton.appendChild(textoBoton);
 		contenedor.insertBefore(form, contenedor.childNodes[0]);
 		form.insertBefore(input, form.childNodes[0]).classList.add("texto");
 		form.insertBefore(boton,form.childNodes[1]).classList.add("agregar");
+		form.insertBefore(icon, form.childNodes[2].classList.add("close"));
+		
 		contenedor.classList.add("contenedor");
+		boton.style.display = "inline-block";
+		boton.classList.add("btn-sucess", "btn-block", "btn", "btn-sm", "pull-left");
+		icon.classList.add("icon-cross");
+		icon.classList.add("cross");
 
 		boton.addEventListener ("click", function (e) {
 			e.preventDefault();
 			/*listaVacia(texto);*/
 			agregarContenidoLista (input, contenedor);
+			//agregarNuevaLista();
 
 		});
 		
-		function agregarContenidoLista (input, contenedor) {
+		function agregarContenidoLista (input, origen) {
 			input.style.display = "none";
 			boton.style.display = "none";
 
@@ -38,13 +46,16 @@ window.addEventListener("load", function () {
 			var nuevoContenedor = document.createElement("div");
 			var agregarEntradaEnlace = document.createElement("a");
 			var textoEnlace = document.createTextNode("Añadir una tarjeta...");
-			
+
 			agregarEntradaEnlace.appendChild(textoEnlace);
 			nuevoContenedor.innerHTML = texto;
 			form.insertBefore(nuevoContenedor, form.childNodes[0]);
 			form.appendChild(textoEnlace);
+			origen.parentNode.insertBefore(nuevoContenedor, origen.previousSibling);
+			nuevoContenedor.style.cssFloat = "left";
+			origen.style.display = "inline-block";
 		}
-	}
+}
 
 
 
